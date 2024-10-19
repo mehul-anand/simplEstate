@@ -56,6 +56,10 @@ nav {
         gap: 50px;
         height: 100%;
 
+        @include md{
+            background-color: transparent;
+        }
+
         a {
             padding: 12px 24px;
             margin: 20px;
@@ -63,6 +67,45 @@ nav {
 
         .register {
             background-color: #fece51;
+        }
+
+        .menuIcon {
+            display: none;
+            z-index: 999;
+
+            img{
+                width: 36px;
+                height: 36px;
+                cursor: pointer;
+            }
+
+            @include sm {
+                display: initial;
+            }
+        }
+        .menu{
+            position: absolute;
+            top: 0;
+            right: -50%;
+            background-color: black;
+            color: ivory;
+            height: 100vh;
+            width: 50%;
+            transition: all 1s ease;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+
+            &.active{
+                right: 0;
+            }
+
+            @include sm{
+                a{
+                    display: initial;
+                }
+            }
         }
     }
 }
