@@ -1,8 +1,8 @@
-@import "./responsive.scss";
+@use "./responsive.scss" as *;
+
 
 
 .layout{
-    background-color: rebeccapurple;
     height: 100vh;
     max-width: 1366px;
     margin-left: auto;
@@ -11,15 +11,12 @@
     padding-right: 20px;
 
     @include lg {
-        background-color: olivedrab;
         max-width: 1280px;
       }
       @include md {
-        background-color: orange;
         max-width: 768px;
       }
       @include sm {
-        background-color: fuchsia;
         max-width: 640px;
       }
       
