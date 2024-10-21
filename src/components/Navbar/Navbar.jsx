@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./navbar.scss";
 
 function Navbar() {
-  const [opem,setOpen] = useState(false)
+  const [open,setOpen] = useState(false)
   return (
     <div>
       <nav>
