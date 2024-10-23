@@ -9,6 +9,7 @@
   padding-right: 20px;
   display: flex;
   flex-direction: column;
+  
 
   @include lg {
     max-width: 1280px;
@@ -22,7 +23,7 @@
     max-width: 640px;
   }
 
-  .homepage {
+  .content {
     flex: 1;
   }
 }
