@@ -1,11 +1,18 @@
-import "./layout.scss"
-import Navbar from "./components/Navbar/Navbar"
+import "./layout.scss";
+import Navbar from "./components/Navbar/Navbar";
+import HomePage from "./pages/homePage/homePage";
+
 function App() {
   return (
     <div className="layout">
-      <Navbar/>
+      <div className="navbar">
+        <Navbar />
+      </div>
+      <div className="content">
+        <HomePage />
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
