@@ -14,6 +14,7 @@ import Layout from './pages/layoutPage/Layout.jsx';
 import HomePage from './pages/homePage/homePage.jsx';
 import ListingPage from './pages/listingPage/ListingPage.jsx';
 import SinglePage from './pages/singlePage/singlePage.jsx';
+import ProfilePage from "./pages/profilePage/ProfilePage.jsx"
 
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const appRouter = createBrowserRouter(
       <Route path='' element={<HomePage/>}/>
       <Route path='list' element={<ListingPage/>}/>
       <Route path= "/:id" element={<SinglePage/>}/>
+      <Route path= "/profile" element={<ProfilePage/>}/>
     </Route>
   )
 )
