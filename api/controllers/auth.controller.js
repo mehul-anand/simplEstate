@@ -3,7 +3,7 @@ import prisma from "../lib/prisma.js";
 export const registerFunc = async (req, res) => {
   try {
     const { username, email, pass } = req.body;
-    const hashedPass = await bcrypt.hash(pass, 7);
+    const hashedPass = await bcrypt.hash(pass, 10);
     console.log("Hashed password:", hashedPass);
 
     const newUser = await prisma.user.create({
