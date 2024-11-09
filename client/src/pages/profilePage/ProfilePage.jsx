@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./profilePage.scss"
 import List from '../../components/list/List'
 import Chat from '../../components/chat/Chat'
+import apiRequest from '../../lib/apiRequest'
+import { useNavigate } from 'react-router-dom'
 
 function ProfilePage() {
+    const navigate = useNavigate()
+    const [errorMessage,setErrorMessage] = useState("")
+    const [isLoading,setIsLoading] = useState(false)
+    const handleLogout = async()=>{
+        setIsLoading(true)
+        setErrorMessage("")
+        try {
+            const res = apiRequest.post("/auth/logout")
+            localStorage.removeItem("user")
+            navigate("/")
+        } catch (err) {
+            setErrorMessage(err)
+        }finally{
+            setIsLoading(false)
+        }
+
+    }
   return (
     <div className='profilePage'>
         <div className="details">
@@ -18,7 +37,10 @@ function ProfilePage() {
                     </span>
                     <span>Username : <b>User</b></span>
                     <span>E-mail address<b>abc@gmail.com</b></span>
+                    <button disabled={isLoading} onClick={handleLogout}>Logout</button>
+                    {errorMessage && <span className='errorMessage'>{errorMessage}</span>}
                 </div>
+                
                 <div className="title">
                     <h1>My List</h1>
                     <button>New Post</button>
