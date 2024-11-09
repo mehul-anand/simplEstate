@@ -16,7 +16,7 @@ export const registerFunc = async (req, res) => {
     res.status(201).json({ message: "User created successfully", newUser });
   } catch (error) {
     // console.error("Error in registerFunc:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: "Failed to create user" });
   }
 };
 
@@ -55,10 +55,12 @@ export const loginFunc = async (req, res) => {
       id:user.id
     },process.env.JWT_SECRET_KEY,{expiresIn:age})
 
+    const {password:userPass,...restOfTheData} = user;
+
     res
       .cookie("token", token, { httpOnly: true  ,maxAge : age})
       .status(200)
-      .json({ message: "Login Successful" });
+      .json(restOfTheData);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Failed to login" });
