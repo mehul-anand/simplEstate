@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./homePage.scss";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import ChatIcon from "../../../public/Icons/ChatIcon";
 import MoneyIcon from "../../../public/Icons/MoneyIcon";
 import Typewriter from "typewriter-effect";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function HomePage() {
+
+  const {currentUser} = useContext(AuthContext)
+  console.log(currentUser);
   return (
     <div className="homePage">
       <div className="textContainer">
