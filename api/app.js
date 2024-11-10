@@ -13,7 +13,7 @@ app.use(cookieParser())
 
 app.use("/api/post", postRoute);
 app.use("/api/auth", authRoute);
-app.use("/api/test", authRoute);
+app.use("/api/test", testRoute);
 
 app.use("/", (req, res) => {
   res.send("main page");
