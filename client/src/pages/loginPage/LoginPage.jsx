@@ -1,19 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./loginPage.scss";
 import { Link, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading,setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const {updateUser} = useContext(AuthContext)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage("")
-    setIsLoading(true)
+    setErrorMessage("");
+    setIsLoading(true);
     const formData = new FormData(e.target);
     const username = formData.get("username");
-const password = formData.get("password");
+    const password = formData.get("password");
 
     try {
       const res = await apiRequest.post("/auth/login", {
@@ -21,12 +23,13 @@ const password = formData.get("password");
         password,
       });
 
+      updateUser(res.data)
+
       navigate("/");
     } catch (error) {
       setErrorMessage(error.response.data.message);
-    }
-    finally{
-        setIsLoading(false)
+    } finally {
+      setIsLoading(false);
     }
   };
   return (

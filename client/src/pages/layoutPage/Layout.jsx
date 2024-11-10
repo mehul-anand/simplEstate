@@ -1,14 +1,15 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import "./layout.scss"
+import React, { useContext, useEffect } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import "./layout.scss";
 import Navbar from "../../components/Navbar/Navbar";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function Layout() {
   return (
     <>
       <div className="layout">
         <div className="navbar">
-            <Navbar/>
+          <Navbar />
         </div>
         <div className="content">
           <Outlet />
@@ -17,5 +18,18 @@ function Layout() {
     </>
   );
 }
+function RequireAuth() {
+  const { currentUser } = useContext(AuthContext);
 
-export default Layout;
+  return !currentUser ? (
+    <Navigate to="/login" />
+  ) : (
+    <div className="layout">
+      <div className="content">
+        <Outlet />
+      </div>
+    </div>
+  );
+}
+
+export { Layout, RequireAuth };
