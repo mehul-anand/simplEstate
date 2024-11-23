@@ -37,8 +37,8 @@ function LoginPage() {
       <div className="formContainer">
         <form onSubmit={handleSubmit}>
           <h1>Welcome back</h1>
-          <input name="username" type="text" placeholder="Username" />
-          <input name="password" type="password" placeholder="Password" />
+          <input required name="username" type="text" placeholder="Username" />
+          <input required name="password" type="password" placeholder="Password" />
           <button disabled={isLoading}>Login</button>
           {errorMessage && <span>{errorMessage}</span>}
           <Link to="/register">{"Don't"} you have an account?</Link>
