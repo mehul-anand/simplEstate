@@ -9,12 +9,11 @@ import { AuthContext } from "../../contexts/AuthContext";
 function HomePage() {
 
   const {currentUser} = useContext(AuthContext)
-  console.log(currentUser);
   return (
     <div className="homePage">
       <div className="textContainer">
         <div className="wrapper">
-          <h1 className="title">Simple Estate</h1>
+          <h1 className="title">SimplEstate</h1>
 
           <div className="desc">
             <Typewriter
