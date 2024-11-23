@@ -25,10 +25,13 @@ function RequireAuth() {
     <Navigate to="/login" />
   ) : (
     <div className="layout">
-      <div className="content">
-        <Outlet />
-      </div>
+    {/* <div className="navbar">
+      <Navbar />
+    </div> */}
+    <div className="content">
+      <Outlet />
     </div>
+  </div>
   );
 }
 
