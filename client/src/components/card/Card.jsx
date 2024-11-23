@@ -3,10 +3,23 @@ import { Link } from "react-router-dom";
 import "./card.scss";
 
 function Card({ propertyData }) {
+  // Add check to ensure propertyData is defined
+  if (!propertyData) {
+    console.error("Card component received undefined propertyData");
+    return null; // Optionally return a fallback UI
+  }
+
+  // Check if required fields like 'id' exist
+  if (!propertyData.id || !propertyData.images || propertyData.images.length === 0) {
+    console.error("propertyData is missing required fields: id or images");
+    return null; // Optionally return a fallback UI
+  }
+
   return (
     <div className="card">
       <Link className="imgContainer" to={`/${propertyData.id}`}>
-        <img src={propertyData.img} alt={`image : ${propertyData.title}`} />
+        <img src={propertyData.images[0]} alt={`image: ${propertyData.title}`} />
+        <div className="ribbon">{propertyData.type}</div>
       </Link>
       <div className="textContainer">
         <h2 className="title">
@@ -16,7 +29,7 @@ function Card({ propertyData }) {
           <img src="/pin.png" alt="" />
           <span>{propertyData.address}</span>
         </p>
-        <p className="price">₹ {propertyData.price}</p>
+        <p className="price">₹ {propertyData.price}<span>{propertyData.type==="rent"?"/month":""}</span></p>
         <div className="bottom">
           <div className="features">
             <div className="feature">
