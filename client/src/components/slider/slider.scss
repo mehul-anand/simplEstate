@@ -81,6 +81,9 @@
         flex-direction: column;
         justify-content: space-between;
         gap: 20px;
+        @include sm{
+            display: none;
+        }
 
         img {
             height: 100px;
