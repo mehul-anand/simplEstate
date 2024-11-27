@@ -6,6 +6,7 @@ export const addMessage = async (req, res) => {
   const text = req.body.text;
 
   try {
+    console.log("try")
     const chat = await prisma.chat.findUnique({
       where: {
         id: chatId,
@@ -35,7 +36,7 @@ export const addMessage = async (req, res) => {
       },
     });
 
-    res.status(200).json({message:"message added"});
+    res.status(200).json(message);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to add message!" });
