@@ -9,6 +9,7 @@ export const singlePageLoader = async ({ request, params }) => {
 export const listPageLoader = async ({ request, params }) => {
   // console.log("request: ",request);
   const query = request.url.split("?")[1];
+  console.log("query:",query)
   const postPromise = apiRequest("/posts?" + query);
   return defer({
     postResponse: postPromise,
