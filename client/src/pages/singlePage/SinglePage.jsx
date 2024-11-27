@@ -7,11 +7,15 @@ import DOMPurify from "dompurify";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../../contexts/AuthContext";
+import PredictedPrice from "../../components/predictedPrice/PredictedPrice";
+
 function SinglePage() {
   const post = useLoaderData();
+  console.log(post)
+  const navigate = useNavigate();
+  console.log(post.userId);
   const [saved, setSaved] = useState(post.isSaved);
   const { currentUser } = useContext(AuthContext);
-  const navigate = useNavigate();
   const handleSave = async () => {
     setSaved((prev) => !prev);
     if (!currentUser) {
@@ -22,6 +26,14 @@ function SinglePage() {
     } catch (err) {
       console.log(err);
       setSaved((prev) => !prev);
+    }
+  };
+  const sendText = async () => {
+    try {
+      await apiRequest.post("/chats", { receiverId: post.userId });
+      navigate("/profile");
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
@@ -37,8 +49,22 @@ function SinglePage() {
                   <img src="/pin.png" alt="pin" />
                   <span>{post.address}</span>
                 </div>
-                <div className="price">₹ {post.price}</div>
-                <div className="price">Suggested price - ₹ 13500</div>
+                <div className="price">
+                  ₹{" "}
+                  {post.price >= 1_00_00_000
+                    ? `${(post.price / 1_00_00_000).toFixed(1)} crore`
+                    : post.price >= 1_00_000
+                    ? `${(post.price / 1_00_000).toFixed(1)} lakh`
+                    : post.price >= 1_000
+                    ? `${(post.price / 1_000).toFixed(1)} thousand`
+                    : post.price}
+                  <span>{post.type === "rent" ? "/month" : ""}</span>
+                </div>
+
+                <div className="price">
+                  <PredictedPrice postData={post} />
+                  <span>{post.type === "rent" ? "/month" : ""}</span>
+                </div>
               </div>
               <div className="user">
                 <img src={post.user.avatar} alt="user-image" />
@@ -147,7 +173,7 @@ function SinglePage() {
             <Map items={[post]} />
           </div>
           <div className="buttons">
-            <button>
+            <button onClick={sendText}>
               <img src="/chat.png" alt="chat-icon" />
               <p>Chat</p>
             </button>
