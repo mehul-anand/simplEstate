@@ -2,7 +2,10 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-  
+    .empty{
+      font-size: 20px;
+      text-align: center;
+    }
     .messages {
       flex: 1;
       display: flex;
@@ -37,6 +40,7 @@
     }
   
     .chatBox {
+      
       flex: 1;
       background-color: white;
       display: flex;
