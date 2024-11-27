@@ -10,7 +10,11 @@ function Card({ propertyData }) {
   }
 
   // Check if required fields like 'id' exist
-  if (!propertyData.id || !propertyData.images || propertyData.images.length === 0) {
+  if (
+    !propertyData.id ||
+    !propertyData.images ||
+    propertyData.images.length === 0
+  ) {
     console.error("propertyData is missing required fields: id or images");
     return null; // Optionally return a fallback UI
   }
@@ -18,7 +22,10 @@ function Card({ propertyData }) {
   return (
     <div className="card">
       <Link className="imgContainer" to={`/${propertyData.id}`}>
-        <img src={propertyData.images[0]} alt={`image: ${propertyData.title}`} />
+        <img
+          src={propertyData.images[0]}
+          alt={`image: ${propertyData.title}`}
+        />
         <div className="ribbon">{propertyData.type}</div>
       </Link>
       <div className="textContainer">
@@ -29,7 +36,18 @@ function Card({ propertyData }) {
           <img src="/pin.png" alt="" />
           <span>{propertyData.address}</span>
         </p>
-        <p className="price">₹ {propertyData.price}<span>{propertyData.type==="rent"?"/month":""}</span></p>
+        <p className="price">
+          ₹{" "}
+          {propertyData.price >= 1_00_00_000
+            ? `${(propertyData.price / 1_00_00_000).toFixed(1)} crore`
+            : propertyData.price >= 1_00_000
+            ? `${(propertyData.price / 1_00_000).toFixed(1)} lakh`
+            : propertyData.price >= 1_000
+            ? `${(propertyData.price / 1_000).toFixed(1)} thousand`
+            : propertyData.price}
+          <span>{propertyData.type === "rent" ? "/month" : ""}</span>
+        </p>
+
         <div className="bottom">
           <div className="features">
             <div className="feature">

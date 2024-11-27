@@ -96,6 +96,11 @@
                     background-color: whitesmoke;
                     padding: 5px;
                     border-radius: 5px;
+                    p{
+                        @include sm{
+                            display: none;
+                        }
+                    }
                 }
             }
 
